@@ -1,13 +1,13 @@
 const {model, Schema } = require('mongoose')
 
 const ClientSchema = new Schema ({
-    localName: {
+    barName: {
         type: String
     },
     barManager: {
         type: String
     },
-    Owner: {
+    owner: {
         type: String
     },
     location: {
