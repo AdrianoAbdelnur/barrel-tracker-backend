@@ -9,8 +9,23 @@ const UserSchema = new Schema({
     },
     password: {
         type: String
-    }
-})
+    },
+    createAt: {
+        type: Date,
+        default: Date.now(),
+    },
+    isDelete: {
+        type: Boolean,
+        default: false,
+    },
+    role: {
+        type: String,
+        default: 'user'
+    },
+},{
+    versionKey: false
+}
+)
 
 const User = model ('User', UserSchema);
 
