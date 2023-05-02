@@ -23,7 +23,8 @@ const ClientSchema = new Schema ({
     isDeleted: {
         type: Boolean,
         default:false
-    }
+    },
+
 })
 
 const Client = model("Client", ClientSchema);

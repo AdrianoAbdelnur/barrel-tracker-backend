@@ -1,7 +1,7 @@
 const {body} = require('express-validator')
 const User = require("./../models/User")
 
-const createUsersValidations = async(req,res, next) => {
+const createUsersValidations = async(req, res, next) => {
     try {
         const {name, email, password} = req.body;
         if (!name || !email || !password) return res.status(400).json({message: "All fields are required"})
