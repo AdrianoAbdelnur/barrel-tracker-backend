@@ -10,6 +10,16 @@ const addClient = async(req, res) => {
     }
 }
 
+const getClients =  async (req, res) => {
+    try {
+        const clientsList = await Client.find();
+        res.status(200).json({message: 'Clients obtained correctly', clientsList})
+    } catch (error) {
+        res.status(error.code || 500).json({message : error.message})
+    }
+}
+
 module.exports= {
     addClient,
+    getClients
 }
