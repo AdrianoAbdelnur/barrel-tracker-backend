@@ -25,7 +25,10 @@ const ClientSchema = new Schema ({
         default:false
     },
 
-})
+},{
+    versionKey: false
+}
+)
 
 const Client = model("Client", ClientSchema);
 
