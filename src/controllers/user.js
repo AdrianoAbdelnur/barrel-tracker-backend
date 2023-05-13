@@ -28,10 +28,11 @@ const loginUser= async(req, res) => {
         if (!loginSucced) return res.status(400).json({message: "wrong password or email"})
         const payload = {
             user : {
-                id : userFound._id, 
+                id : userFound._id,
+                role: userFound.role
             },
         };
-        jwt.sign(payload, process.env.SECRETWORD, {expiresIn: "1h"}, (error, token)=>{
+        jwt.sign(payload, process.env.SECRETWORD, {expiresIn: "2h"}, (error, token)=>{
             if(error) {
                 throw error;
             }
@@ -45,13 +46,18 @@ const loginUser= async(req, res) => {
 
 const getUserData = async(req, res) => {
     try {
-        const token = req.header('Authorization');
-        if (!token) return res.status(401).json({message: "token not found"});
-        const payload = jwt.verify(token, process.env.SECRETWORD)
-        const userFound = await User.findById(payload?.user?.id).select("-password -__v")
-        res.json(userFound)
+        const userFound = await User.findById(req.userId).select("-password -__v")
+        res.status(200).json({message: "User Found", userFound})
     } catch (error) {
         res.status(error.code || 500).json({message: error.message})
+    }
+}
+
+const loginStatus = (req, res) => {
+    try {
+        return res.status(200).json({ message: 'user is logged', isLogged: true, role: req.userRole})
+    } catch (error) {
+        return res.status(error.code || 500).json({ message: error.message });
     }
 }
 
@@ -59,4 +65,5 @@ module.exports = {
     addUser,
     loginUser,
     getUserData,
+    loginStatus,
 }
