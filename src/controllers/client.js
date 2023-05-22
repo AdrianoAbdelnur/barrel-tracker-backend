@@ -6,7 +6,6 @@ const addClient = async(req, res) => {
         await newClient.save();
         res.status(200).json({message: 'Client created successfully', newClient})
     } catch (error) {
-        res.status(error.code || 500).json({message : error.message})
     }
 }
 
@@ -19,7 +18,21 @@ const getClients =  async (req, res) => {
     }
 }
 
+const getACustomer = async(req,res) => {
+    try {
+        const {barName} = req.body
+        const customerFound = await Client.findOne({barName})
+        if (customerFound) {
+            return res.status(200).json({message: 'Customer obtained correctly', customerFound})
+        }
+        throw Error("Customer not found");
+    } catch (error) {
+        res.status(error.code || 500).json({message : error.message})
+    }
+}
+
 module.exports= {
     addClient,
-    getClients
+    getClients,
+    getACustomer,
 }
