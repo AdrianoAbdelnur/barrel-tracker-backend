@@ -6,6 +6,7 @@ const addClient = async(req, res) => {
         await newClient.save();
         res.status(200).json({message: 'Client created successfully', newClient})
     } catch (error) {
+        res.status(error.code || 500).json({message : error.message})
     }
 }
 
