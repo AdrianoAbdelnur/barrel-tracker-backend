@@ -4,7 +4,7 @@ const BarrelSchema = new Schema({
     id: {
         type: String
     },
-    status: {
+    statusBarrel: {
         type: String,
         default: "empty in factory"
     },
@@ -15,12 +15,12 @@ const BarrelSchema = new Schema({
     capacity: {
         type: Number
     },
-    customer: [
+    customer: 
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Client"
         }
-    ],
+    ,
     isDeleted: {
         type: Boolean,
         default:false
