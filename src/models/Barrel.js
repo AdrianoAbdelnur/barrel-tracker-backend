@@ -8,6 +8,9 @@ const BarrelSchema = new Schema({
         type: String,
         default: "empty in factory"
     },
+    statusDate: {
+        type: Date
+    },
     style: {
         type:String,
         default: "none style"

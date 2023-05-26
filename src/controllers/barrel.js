@@ -35,17 +35,16 @@ const getABarrel = async(req, res) => {
 const changeStatus = async(req, res) => {
     try {
         const {id} = req.params;
-        console.log(req.body.customer)
         if (req.body.statusBarrel === "empty in factory") {
-            const upDatedBarrel = await Barrel.findOneAndUpdate({id}, { statusBarrel: req.body.statusBarrel, style: req.body.style }, {new: true}).select("-customer")
+            const upDatedBarrel = await Barrel.findOneAndUpdate({id}, { statusBarrel: req.body.statusBarrel, style: req.body.style, statusDate: Date.now()}, {new: true}).select("-customer")
             return res.status(200).json({message: 'Barrel status updated corretly', upDatedBarrel})
         }
         if (req.body.statusBarrel === "full in factory") {
-            const upDatedBarrel = await Barrel.findOneAndUpdate({id}, { statusBarrel: req.body.statusBarrel, style: req.body.style}, {new: true}).select("-customer")
+            const upDatedBarrel = await Barrel.findOneAndUpdate({id}, { statusBarrel: req.body.statusBarrel, style: req.body.style, statusDate: Date.now()}, {new: true}).select("-customer")
             return res.status(200).json({message: 'Barrel status updated corretly', upDatedBarrel})
         }
         if (req.body.statusBarrel === "delivered to customer") {
-            const upDatedBarrel = await Barrel.findOneAndUpdate({id}, { statusBarrel: req.body.statusBarrel, customer: req.body.customer}, {new: true}).populate("customer")
+            const upDatedBarrel = await Barrel.findOneAndUpdate({id}, { statusBarrel: req.body.statusBarrel, customer: req.body.customer, statusDate: Date.now()}, {new: true}).populate("customer")
             return res.status(200).json({message: 'Barrel status updated corretly', upDatedBarrel})
         }
         
