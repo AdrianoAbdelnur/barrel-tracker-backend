@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { addNewStyle, deleteStyle } = require("../controllers/stylesBeer");
+const { addNewStyle, getStyles, updatePrices } = require("../controllers/stylesBeer");
 const { addStyleValidations } = require("../middleware/stylesBeer");
 
 router.post("/addNewStyle", addStyleValidations , addNewStyle);
-router.post("/deleteStyle", deleteStyle);
+router.get("/getStyles", getStyles);
+router.patch("/updatePrices", updatePrices);
 
 module.exports = router

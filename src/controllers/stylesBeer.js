@@ -11,18 +11,29 @@ const addNewStyle = async(req,res)=>{
     }
 }
 
-
-const deleteStyle = async(req,res) => {
+const getStyles = async (req, res) => {
     try {
-        req.send("hola")
+        const stylesFound = await StyleBeer.find({ isDelete: false })
+        res.status(200).json({message: "Styles got correctly", stylesFound})
     } catch (error) {
         res.status(error.code || 500).json({message : error.message})
-        
+    }
+}
+
+const updatePrices = async (req, res) => {
+    try {
+        const {_id, price} = req.body
+        const newStyle = await StyleBeer.findByIdAndUpdate(_id, {price}, {new: true})
+        res.status(200).json({message:"Price updated", newStyle})
+    } catch (error) {
+        res.status(error.code || 500).json({message : error.message})
     }
 }
 
 
+
 module.exports= {
     addNewStyle,
-    deleteStyle
+    getStyles,
+    updatePrices
 }
