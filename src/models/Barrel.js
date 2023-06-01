@@ -9,17 +9,17 @@ const BarrelSchema = new Schema({
         default: "empty in factory"
     },
     statusDate: {
-        type: Date
+        type: Date,
+        default: Date.now(),
     },
     style: {
-        type:String,
-        default: "none style"
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "StyleBeer"
     },
     capacity: {
         type: Number
     },
-    customer: 
-        {
+    customer: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Client"
         }
