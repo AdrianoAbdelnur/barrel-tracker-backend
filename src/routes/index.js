@@ -7,6 +7,7 @@ router.use('/client', require('./client'))
 router.use('/barrel', require('./barrel'))
 router.use('/styles', require('./stylesBeer'))
 router.use('/sale', require('./sale'))
+router.use('/pay', require('./pay'))
 
 
 

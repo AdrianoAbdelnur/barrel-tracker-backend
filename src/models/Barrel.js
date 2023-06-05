@@ -22,8 +22,7 @@ const BarrelSchema = new Schema({
     customer: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Client"
-        }
-    ,
+        },
     isDeleted: {
         type: Boolean,
         default:false
