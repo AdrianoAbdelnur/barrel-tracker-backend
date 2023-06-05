@@ -16,7 +16,12 @@ const SaleSchema = new Schema ({
         type: Number
     },
     paid: {
-        type: Number
+        type: Number,
+        default:0
+    },
+    paidComplete:{
+        type: Boolean,
+        default: false
     },
     customer: {
         type: mongoose.Schema.Types.ObjectId,
