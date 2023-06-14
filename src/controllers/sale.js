@@ -1,3 +1,4 @@
+const { isWithinInterval } = require("date-fns");
 const Sale = require("../models/Sale");
 
 
@@ -13,8 +14,20 @@ const newSale = async(req, res) => {
 
 const getSales = async(req, res) => {
     try {
+        const {startDate, endDate} = req.query
         const salesFound = await Sale.find().populate("customer").populate("style")
-        res.status(200).json({message: "Sales obtained", salesFound})
+        let filteredSales = [];
+        if (!startDate) {
+            filteredSales = salesFound;
+        }else for (const sale of salesFound) {
+                if ( isWithinInterval(sale.date, {
+                    start: new Date(startDate),
+                    end: new Date(endDate)
+                })) {
+                    filteredSales.push(sale)
+                }
+            }
+        res.status(200).json({message: "Sales obtained", filteredSales})
     } catch (error) {
         res.status(error.code || 500).json({message : error.message})
         

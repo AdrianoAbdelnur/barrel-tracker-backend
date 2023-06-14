@@ -1,3 +1,4 @@
+const { isWithinInterval } = require("date-fns");
 const Cost = require("../models/Cost");
 
 
@@ -13,8 +14,20 @@ const addNewCost = async(req, res) => {
 
 const getCosts = async(req, res) => {
     try {
+        const {startDate, endDate} = req.query
         const costsFound = await Cost.find({isDeleted: false})
-        res.status(200).json({message: "Costs found", costsFound})
+        let filteredCosts = [];
+        if (!startDate) {
+            filteredCosts = costsFound;
+        }else for (const cost of costsFound) {
+                if ( isWithinInterval(cost.date, {
+                    start: new Date(startDate),
+                    end: new Date(endDate)
+                })) {
+                    filteredCosts.push(cost)
+                }
+            }
+        res.status(200).json({message: "Costs found", filteredCosts})
     } catch (error) {
         res.status(error.code || 500).json({message : error.message})
         
