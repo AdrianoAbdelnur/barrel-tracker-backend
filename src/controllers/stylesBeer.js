@@ -30,10 +30,21 @@ const updatePrices = async (req, res) => {
     }
 }
 
+const updateRecipe = async (req, res) => {
+    try {
+        const {name, hasRecipe} = req.body
+        const newStyle = await StyleBeer.findOneAndUpdate({name : name}, {hasRecipe}, {new: true})
+        res.status(200).json({message:"Has Recipe updated", newStyle})
+    } catch (error) {
+        res.status(error.code || 500).json({message : error.message})
+    }
+}
+
 
 
 module.exports= {
     addNewStyle,
     getStyles,
-    updatePrices
+    updatePrices,
+    updateRecipe
 }

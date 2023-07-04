@@ -4,36 +4,52 @@ const RecipeSchema = new Schema ({
     name: {
         type: String
         },
-    malts: [
-            {
+    malts: [{
+            item: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "Ingredient"
+            },
+            quantity: {
+                type: Number
             }
-    ],
-    hops: [
-            {
+    }],
+    hops: [{
+            item: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "Ingredient"
+            },
+            quantity: {
+                type: Number
             }
-    ],
-    yeasts: [
-            {
+
+    }],
+    yeasts: [{
+            item: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "Ingredient"
+            },
+            quantity: {
+                type: Number
             }
-    ],
-    others: [
-            {
+    }],
+    others: [{
+            item: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "Ingredient"
+            },
+            quantity: {
+                type: Number
             }
-    ],
-    cleaning: [
-            {
+    }],
+    cleanings: [{
+            item: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "Ingredient"
+            },
+            quantity: {
+                type: Number
             }
-    ],
+    }],
     isDeleted: {
         type: Boolean,
         default:false
