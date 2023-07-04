@@ -1,6 +1,5 @@
 const Recipe = require("../models/Recipe")
 
-
 const verifyRecipe = async(req, res, next ) => {
     try {
         const {name, malts, hops, yeasts, cleanings } = req.body

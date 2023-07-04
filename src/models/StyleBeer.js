@@ -7,6 +7,10 @@ const StyleBeerSchema = new Schema ({
     price: {
         type : Number
     },
+    hasRecipe: {
+        type: Boolean,
+        default: false
+    },
     isDelete: {
         type: Boolean,
         default: false,
