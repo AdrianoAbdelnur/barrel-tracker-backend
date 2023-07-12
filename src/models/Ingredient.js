@@ -10,6 +10,9 @@ const IngredientSchema = new Schema ({
     price: {
         type: Number
     },
+    units: {
+        type: String
+    },
     isDeleted: {
         type: Boolean,
         default:false

@@ -19,8 +19,19 @@ const getIngredients =  async (req, res) => {
     }
 }
 
+const updatePrices = async (req, res) => {
+    try {
+        const {_id, price} = req.body
+        const newIngredient = await Ingredient.findByIdAndUpdate(_id, {price}, {new: true})
+        res.status(200).json({message:"Price updated", newIngredient})
+    } catch (error) {
+        res.status(error.code || 500).json({message : error.message})
+    }
+}
+
 
 module.exports= {
     addNewIngredient,
-    getIngredients
+    getIngredients,
+    updatePrices
 }
