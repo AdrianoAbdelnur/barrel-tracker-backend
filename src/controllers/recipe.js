@@ -5,7 +5,6 @@ const addNewRecipe = async(req, res) => {
     try {
         const recipeFound = await Recipe.findOneAndUpdate({name: req.body.name, isDeleted: false}, req.body,{new:true})
         if (recipeFound) {
-            console.log(req.body)
             return res.status(200).json({message: 'The Recipe was updated correctly', recipeFound})
         }else {
             const newRecipe = new Recipe(req.body)
