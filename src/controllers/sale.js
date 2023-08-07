@@ -54,10 +54,21 @@ const updatePay = async(req, res) => {
     }
 }
 
+const upDatePrice= async(req,res) => {
+    try {
+        const {id, price}=req.body
+        const priceUpdate = await Sale.findByIdAndUpdate(id, {price}, {new: true} )
+        res.status(200).json({message: "Price updated", priceUpdate})
+    } catch (error) {
+        res.status(error.code || 500).json({message : error.message})
+    }
+}
+
 
 module.exports= {
     newSale,
     getSales,
     getSalesNotPaid,
     updatePay,
+    upDatePrice
 }
