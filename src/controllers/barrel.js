@@ -50,7 +50,6 @@ const changeStatus = async(req, res) => {
         
     } catch (error) {
         res.status(error.code || 500).json({message : error.message})
-        
     }
 }
 
