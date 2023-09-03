@@ -17,8 +17,11 @@ const OrderSchema = new Schema({
                 type: Number
             }
         }    
-    ] 
-    ,
+    ],
+    status: {
+        type: String,
+        default: "pending"
+    },
     Date: {
         type: Date,
         default: Date.now(),
