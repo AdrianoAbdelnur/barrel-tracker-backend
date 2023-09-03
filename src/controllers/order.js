@@ -12,7 +12,7 @@ const addNewOrder = async(req, res) => {
 
 const getOrders =  async (req, res) => {
     try {
-        const ordersList = await Order.find();
+        const ordersList = await Order.find({status: "pending"});
         res.status(200).json({message: 'Orders obtained correctly', ordersList})
     } catch (error) {
         res.status(error.code || 500).json({message : error.message})
