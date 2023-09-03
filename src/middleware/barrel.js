@@ -1,5 +1,4 @@
 
-
 const verifyQrCode = async(req, res, next) => {
     let id = ""
     if(req.body.id) {
