@@ -29,9 +29,27 @@ const updatePrices = async (req, res) => {
     }
 }
 
+const updatePricesByFile = async (req, res) => {
+    try {
+        const {name, ingredientType, price, units} = req.body;
+        const foundIngredient =await Ingredient.findOneAndUpdate({name}, {ingredientType, price, units}, {new:true})
+        if (foundIngredient) {
+            return res.status(200).json({message:"Price updated", foundIngredient})
+        } else {
+            const newIngredient = new Ingredient({name, ingredientType, price, units})
+            await newIngredient.save();
+            return res.status(200).json({message: 'The ingredient was added correctly', newIngredient})
+        }
+
+    } catch (error) {
+        
+    }
+}
+
 
 module.exports= {
     addNewIngredient,
     getIngredients,
-    updatePrices
+    updatePrices,
+    updatePricesByFile
 }
