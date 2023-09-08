@@ -10,7 +10,7 @@ const addNewOrder = async(req, res) => {
     }
 }
 
-const getOrders =  async (req, res) => {
+const getPendingOrders =  async (req, res) => {
     try {
         const ordersList = await Order.find({status: "pending"});
         res.status(200).json({message: 'Orders obtained correctly', ordersList})
@@ -23,5 +23,5 @@ const getOrders =  async (req, res) => {
 
 module.exports= {
     addNewOrder,
-    getOrders
+    getPendingOrders
 }
