@@ -13,6 +13,10 @@ const IngredientSchema = new Schema ({
     units: {
         type: String
     },
+    stock: {
+        type: Number,
+        default: 0
+    },
     isDeleted: {
         type: Boolean,
         default:false
