@@ -29,6 +29,16 @@ const updatePrices = async (req, res) => {
     }
 }
 
+const updateStock = async (req, res) => {
+    try {
+        const {_id, stock} = req.body
+        const newIngredient = await Ingredient.findByIdAndUpdate(_id, {stock}, {new: true})
+        res.status(200).json({message:"Stock updated", newIngredient})
+    } catch (error) {
+        res.status(error.code || 500).json({message : error.message})
+    }
+}
+
 const updatePricesByFile = async (req, res) => {
     try {
         const {name, ingredientType, price, units} = req.body;
@@ -51,5 +61,6 @@ module.exports= {
     addNewIngredient,
     getIngredients,
     updatePrices,
-    updatePricesByFile
+    updatePricesByFile,
+    updateStock
 }
