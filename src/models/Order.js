@@ -3,7 +3,7 @@ const {model, Schema, default: mongoose} = require('mongoose');
 const OrderSchema = new Schema({
     orderList: [
         {
-            StyleId: {
+            styleId: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "Style"
             },
