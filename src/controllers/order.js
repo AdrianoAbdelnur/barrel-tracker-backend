@@ -58,9 +58,9 @@ const getPendingOrders = async (req, res) => {
 
 const cancelOrder = async(req, res) => {
     try {
-        const {_id} = req.params
-        await Order.findByIdAndUpdate({_id}, { status: "cancel" });
-        res.status(200).json({message: 'Order cancelled correctly'})
+        const {id} = req.params;
+        const orderToCancel = await Order.findByIdAndUpdate({ _id : id }, { status: "cancel" }, {new:true});
+        res.status(200).json({message: 'Order cancelled correctly', orderToCancel})
     } catch (error) {
         res.status(error.code || 500).json({ message: error.message })
     }
