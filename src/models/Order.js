@@ -16,9 +16,9 @@ const OrderSchema = new Schema({
             quantity: {
                 type: Number
             },
-            statusItem: {
-                type: String,
-                default: "pending"
+            delivered: {
+                type: Number,
+                default: 0
             }
         }    
     ],
