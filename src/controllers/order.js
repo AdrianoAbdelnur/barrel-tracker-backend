@@ -66,10 +66,48 @@ const cancelOrder = async(req, res) => {
     }
 }
 
+const statusItemChange = async(req, res) => {
+    try {
+        const {customer, styleId, volume} = req.body
+        let itemFound = false
+        const orderFound = await Order.findOne({customer, status: "pending"})
+        if (orderFound) {
+            const newOrderList= orderFound.orderList.map((item) => {
+                if (item?.styleId?.toString() === styleId && item.volume === volume) {
+                    if (item.delivered + 1 <= item.quantity) {
+                        itemFound= true
+                        return {
+                            styleId: item.styleId,
+                            styleName: item.styleName,
+                            volume: item.volume,
+                            quantity: item.quantity,
+                            delivered: item.delivered + 1,
+                            _id: item._id        
+                        }
+                    } return item
+                } else return item
+            })
+            if (itemFound) {
+                const itemPending = newOrderList.find(item => item.delivered !== item.quantity)
+                if(!itemPending){
+                    const orderUpdated = await Order.findOneAndUpdate({customer, status: "pending"}, {orderList: newOrderList, status: "delivered"}, {new:true})
+                    return res.status(200).json({message: 'Order completely delivered', orderUpdated})
+                }else {
+                    const orderUpdated = await Order.findOneAndUpdate({customer, status: "pending"}, {orderList: newOrderList}, {new:true})
+                    return res.status(200).json({message: 'Order updated correctly', orderUpdated})
+                }
+            } else return res.status(400).json({message: 'Item delivered but not ordered'})
+        } else return res.status(400).json({message: 'Item delivered but not ordered'})
+    } catch (error) {
+        res.status(error.code || 500).json({ message: error.message })
+    }
+}
+
 
 
 module.exports = {
     addNewOrder,
     getPendingOrders,
-    cancelOrder
+    cancelOrder,
+    statusItemChange
 }
