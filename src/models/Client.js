@@ -13,6 +13,14 @@ const ClientSchema = new Schema ({
     location: {
         type: String
     },
+    coordinates: {
+        lat: {
+            type: Number
+        },
+        lng: {
+            type: Number
+        }
+    },
     email: {
         type: String
     },
