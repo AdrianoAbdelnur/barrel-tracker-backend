@@ -3,8 +3,8 @@ const Client = require("../models/Client")
 
 const addClietValidations = async(req,res,next) => {
     try {
-        const {barName, barManager, location, email} = req.body
-        if(!barName || !barManager || !location || !email) return res.status(400).json({message: "Required fields must be completed"})
+        const {barName, barManager, location, coordinates} = req.body
+        if(!barName || !barManager || !location || !coordinates) return res.status(400).json({message: "Required fields must be completed"})
         const clientFound = await Client.findOne({barName})
         if(clientFound) return res.status(400).json({message: "The bar's name is alredy in use"})
         next();
