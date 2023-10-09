@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.post('/addNewCost', addNewCost)
 router.get('/getCosts', getCosts)
+router.get('/getTest', getTest)
 
 
 
