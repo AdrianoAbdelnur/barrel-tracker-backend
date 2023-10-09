@@ -36,7 +36,7 @@ const getCosts = async(req, res) => {
 
 const getTest = async(req, res) => {
     try {
-        res.status(200).json({message: "1"})
+        res.status(200).send("1")
     } catch (error) {
         res.status(error.code || 500).json({message : error.message})
     }
