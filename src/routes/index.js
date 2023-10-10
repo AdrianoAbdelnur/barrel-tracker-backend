@@ -14,6 +14,7 @@ router.use('/ingredient', require('./ingredient'))
 router.use('/recipe', require('./recipe'))
 router.use('/productsCosts', require('./productsCosts'))
 router.use('/order', require('./order'))
+router.use('/production', require('./production'))
 
 
 
