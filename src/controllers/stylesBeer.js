@@ -20,6 +20,16 @@ const getStyles = async (req, res) => {
     }
 }
 
+const getStyle = async (req, res) => {
+    try {
+        const {_id} = req.params
+        const styleFound = await StyleBeer.find({ isDelete: false, _id })
+        res.status(200).json({message: "Style got correctly", styleFound})
+    } catch (error) {
+        res.status(error.code || 500).json({message : error.message})
+    }
+}
+
 const updatePrices = async (req, res) => {
     try {
         const {_id, price} = req.body
@@ -46,5 +56,6 @@ module.exports= {
     addNewStyle,
     getStyles,
     updatePrices,
-    updateRecipe
+    updateRecipe,
+    getStyle
 }
