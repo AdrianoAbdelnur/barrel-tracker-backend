@@ -57,7 +57,7 @@ const updatePricesByFile = async (req, res) => {
 
 const updateStockByRecipe = async(req, res) => {
     try {
-        const {malts, cleanings, hops, yeasts} = req.body;
+        const {malts, cleanings, hops, yeasts, others} = req.body;
         for (const malt of malts) {
             await Ingredient.findByIdAndUpdate(malt.item._id, {$inc: {stock: -(malt.quantity)}}, {new:true});
         }
@@ -69,6 +69,9 @@ const updateStockByRecipe = async(req, res) => {
         }
         for (const yeast of yeasts) {
             await Ingredient.findByIdAndUpdate(yeast.item._id, {$inc: {stock: -(yeast.quantity)}}, {new:true});
+        }
+        for (const other of others) {
+            await Ingredient.findByIdAndUpdate(other.item._id, {$inc: {stock: -(other.quantity)}}, {new:true});
         }
         res.status(200).json({message: "Stock updated succesfully"})
     } catch (error) {
