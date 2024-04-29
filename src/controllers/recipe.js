@@ -2,8 +2,9 @@ const Recipe = require("../models/Recipe");
 
 
 const addNewRecipe = async(req, res) => {
+    console.log(req.body)
     try {
-        const recipeFound = await Recipe.findOneAndUpdate({name: req.body.name, isDeleted: false}, req.body,{new:true})
+        const recipeFound = await Recipe.findOneAndUpdate({name: req.body.name, isDeleted: false}, req.body,{new:true}).populate("malts.item").populate("hops.item").populate("yeasts.item").populate("others.item").populate("cleanings.item");
         if (recipeFound) {
             return res.status(200).json({message: 'The Recipe was updated correctly', recipeFound})
         }else {

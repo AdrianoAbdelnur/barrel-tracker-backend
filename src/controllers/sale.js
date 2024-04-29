@@ -47,6 +47,7 @@ const getSalesNotPaid = async(req, res) => {
 const updatePay = async(req, res) => {
     try {
         const {id} = req.params;
+        console.log(req.body.paid)
         const SaleUpdated = await Sale.findByIdAndUpdate(id, {paid: req.body.paid , paidComplete: req.body.paidComplete} , {new: true})
         res.status(200).json({message: "Sales pays updated", SaleUpdated})
     } catch (error) {

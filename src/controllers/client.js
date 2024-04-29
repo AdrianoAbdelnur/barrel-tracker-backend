@@ -12,7 +12,7 @@ const addClient = async(req, res) => {
 
 const getClients =  async (req, res) => {
     try {
-        const clientsList = await Client.find();
+        const clientsList = await Client.find({isDeleted:false});
         res.status(200).json({message: 'Clients obtained correctly', clientsList})
     } catch (error) {
         res.status(error.code || 500).json({message : error.message})
@@ -32,8 +32,34 @@ const getACustomer = async(req,res) => {
     }
 }
 
+const updateCustomer = async(req, res) => {
+    try {
+        const {id} = req.params;
+        const payload = req.body
+        const updatedCustomer = await Client.findByIdAndUpdate(id, payload, {new:true})
+        res.status(200).json({message: 'updated customer', updatedCustomer})
+    } catch (error) {
+        res.status(error.code || 500).json({message : error.message})
+        
+    }
+}
+const deleteCustomer = async(req, res) => {
+    try {
+        const {id} = req.params;
+        const updatedCustomer = await Client.findByIdAndUpdate(id, {isDeleted : true}, {new:true})
+        res.status(200).json({message: 'Customer deleted succesfully', updatedCustomer})
+    } catch (error) {
+        res.status(error.code || 500).json({message : error.message})
+        
+    }
+}
+
+
+
 module.exports= {
     addClient,
     getClients,
     getACustomer,
+    updateCustomer,
+    deleteCustomer,
 }
