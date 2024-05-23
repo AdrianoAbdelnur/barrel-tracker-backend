@@ -25,6 +25,7 @@ const loginUser= async(req, res) => {
         const userFound= await User.findOne({email})
         if (!userFound) return res.status(400).json({message: "We have not been able to identify you"})
         const loginSucced = await bcryptjs.compare(password, userFound.password)
+    console.log(loginSucced)
         if (!loginSucced) return res.status(400).json({message: "We have not been able to identify you"})
         const payload = {
             user : {

@@ -11,7 +11,7 @@ app.use("/api", require('./src/routes'))
 
 mongoose.connect(process.env.DB_URL).then(()=>{
     console.log('conectado a mongoDB')
-    server = app.listen(process.env.API_PORT, () => {
-        console.log(`Aplication listening in port ${process.env.API_PORT}`)
+    server = app.listen(port, () => {
+        console.log(`Aplication listening in port ${port}`)
     })    
 })
